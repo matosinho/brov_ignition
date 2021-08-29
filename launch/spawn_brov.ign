@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<ignition version='1.0'>
+  <executable name='gazebo-server'>
+    <command>./bash/setup_ign_resource_path.sh</command>
+  </executable>
+  <plugin name="ignition::launch::GazeboFactory"
+    filename="ignition-launch-gazebo-factory">
+    <spawn>
+      <name>brov</name>
+      <is_performer>false</is_performer>
+      <allow_renaming>true</allow_renaming>
+      <pose>1 0 2 0 0 0</pose>
+      <sdf version='1.8'>
+        <model name='brov_spawn'>
+          <include>
+            <uri>model://models/brov.sdf</uri>
+          </include>
+        </model>
+      </sdf>
+    </spawn>
+  </plugin>
+</ignition>
