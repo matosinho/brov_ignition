@@ -1,0 +1,367 @@
+<?xml version='1.0'?>
+<sdf version='1.8'>
+  <model name='brov'>
+
+    <!-- BASE_LINK -->
+    <link name="base_link">
+      <inertial>
+        <mass>147.8671</mass>
+        <inertia>
+          <ixx>3.000000</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>41.980233</iyy>
+          <iyz>0</iyz>
+          <izz>41.980233</izz>
+        </inertia>
+      </inertial>
+
+      <collision name="base_link_collision">
+        <geometry>
+          <box>
+            <size>2 0.3 0.246445166667</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <visual name="base_link_visual">
+        <geometry>
+          <mesh>
+            <uri>model://meshes/brov.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+
+    <plugin
+      filename="ignition-gazebo-hydrodynamics-system"
+      name="ignition::gazebo::systems::Hydrodynamics">
+      <link_name>base_link</link_name>
+      <xDotU>-4.876161</xDotU>
+      <yDotV>-126.324739</yDotV>
+      <zDotW>-126.324739</zDotW>
+      <kDotP>0</kDotP>
+      <mDotQ>-33.46</mDotQ>
+      <nDotR>-33.46</nDotR>
+      <xUU>-6.2282</xUU>
+      <xU>0</xU>
+      <yVV>-601.27</yVV>
+      <yV>0</yV>
+      <zWW>-601.27</zWW>
+      <zW>0</zW>
+      <kPP>-0.1916</kPP>
+      <kP>0</kP>
+      <mQQ>-632.698957</mQQ>
+      <mQ>0</mQ>
+      <nRR>-632.698957</nRR>
+      <nR>0</nR>
+    </plugin>
+
+
+    <!-- PROPELLER_NW -->
+    <link name="propeller_NW">
+      <pose>0.11295530 0.18741357 0.00024007 0 0 -0.523598776</pose>
+
+      <inertial>
+        <mass>0.09</mass>
+        <inertia>
+          <ixx>0.000143971303</ixx>
+          <ixy>0.000000000008</ixy>
+          <ixz>-0.000000000224</ixz>
+          <iyy>0.000140915448</iyy>
+          <iyz>-0.000025236433</iyz>
+          <izz>0.000033571862</izz>
+        </inertia>
+      </inertial>
+
+      <visual name="propeller_mesh">
+        <geometry>
+          <mesh>
+            <uri>model://meshes/propeller.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>>
+    </link>
+
+    <joint name="propeller_NW_joint" type="revolute">
+      <pose>0 0 0 0 0 0</pose>
+      <parent>base_link</parent>
+      <child>propeller_NW</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-1e+12</lower>
+          <upper>1e+12</upper>
+          <effort>-1</effort>
+          <velocity>-1</velocity>
+        </limit>
+      </axis>
+    </joint>
+
+    <plugin
+      filename="ignition-gazebo-thruster-system"
+      name="ignition::gazebo::systems::Thruster">
+      <namespace>brov</namespace>
+      <joint_name>propeller_NW_joint</joint_name>
+      <thrust_coefficient>0.004422</thrust_coefficient>
+      <fluid_density>1000</fluid_density>
+      <propeller_diameter>0.2</propeller_diameter>
+    </plugin>
+
+
+    <!-- PROPELLER_SW -->
+    <link name="propeller_SW">
+      <pose>-0.16849162 0.18741357 0.00019422 0 0 0.523598776</pose>
+
+      <inertial>
+        <mass>0.09</mass>
+        <inertia>
+          <ixx>0.000143971303</ixx>
+          <ixy>0.000000000008</ixy>
+          <ixz>-0.000000000224</ixz>
+          <iyy>0.000140915448</iyy>
+          <iyz>-0.000025236433</iyz>
+          <izz>0.000033571862</izz>
+        </inertia>
+      </inertial>
+
+      <visual name="propeller_mesh">
+        <geometry>
+          <mesh>
+            <uri>model://meshes/propeller.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>>
+    </link>
+
+    <joint name="propeller_SW_joint" type="revolute">
+      <pose>0 0 0 0 0 0</pose>
+      <parent>base_link</parent>
+      <child>propeller_SW</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-1e+12</lower>
+          <upper>1e+12</upper>
+          <effort>-1</effort>
+          <velocity>-1</velocity>
+        </limit>
+      </axis>
+    </joint>
+
+    <plugin
+      filename="ignition-gazebo-thruster-system"
+      name="ignition::gazebo::systems::Thruster">
+      <namespace>brov</namespace>
+      <joint_name>propeller_SW_joint</joint_name>
+      <thrust_coefficient>0.004422</thrust_coefficient>
+      <fluid_density>1000</fluid_density>
+      <propeller_diameter>0.2</propeller_diameter>
+    </plugin>
+
+
+    <!-- PROPELLER_NE -->
+    <link name="propeller_NE">
+      <pose>0.11295530 -0.18738132 0.00019422 0 0 0.523598776</pose>
+
+      <inertial>
+        <mass>0.09</mass>
+        <inertia>
+          <ixx>0.000143971303</ixx>
+          <ixy>0.000000000008</ixy>
+          <ixz>-0.000000000224</ixz>
+          <iyy>0.000140915448</iyy>
+          <iyz>-0.000025236433</iyz>
+          <izz>0.000033571862</izz>
+        </inertia>
+      </inertial>
+
+      <visual name="propeller_mesh">
+        <geometry>
+          <mesh>
+            <uri>model://meshes/propeller.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>>
+    </link>
+
+    <joint name="propeller_NE_joint" type="revolute">
+      <pose>0 0 0 0 0 0</pose>
+      <parent>base_link</parent>
+      <child>propeller_NE</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-1e+12</lower>
+          <upper>1e+12</upper>
+          <effort>-1</effort>
+          <velocity>-1</velocity>
+        </limit>
+      </axis>
+    </joint>
+
+    <plugin
+      filename="ignition-gazebo-thruster-system"
+      name="ignition::gazebo::systems::Thruster">
+      <namespace>brov</namespace>
+      <joint_name>propeller_NE_joint</joint_name>
+      <thrust_coefficient>0.004422</thrust_coefficient>
+      <fluid_density>1000</fluid_density>
+      <propeller_diameter>0.2</propeller_diameter>
+    </plugin>
+
+
+    <!-- PROPELLER_SE -->
+    <link name="propeller_SE">
+      <pose>-0.16849162 -0.18738132 0.00024007 0 0 -0.523598776</pose>
+
+      <inertial>
+        <mass>0.09</mass>
+        <inertia>
+          <ixx>0.000143971303</ixx>
+          <ixy>0.000000000008</ixy>
+          <ixz>-0.000000000224</ixz>
+          <iyy>0.000140915448</iyy>
+          <iyz>-0.000025236433</iyz>
+          <izz>0.000033571862</izz>
+        </inertia>
+      </inertial>
+
+      <visual name="propeller_mesh">
+        <geometry>
+          <mesh>
+            <uri>model://meshes/propeller.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>>
+    </link>
+
+    <joint name="propeller_SE_joint" type="revolute">
+      <pose>0 0 0 0 0 0</pose>
+      <parent>base_link</parent>
+      <child>propeller_SE</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-1e+12</lower>
+          <upper>1e+12</upper>
+          <effort>-1</effort>
+          <velocity>-1</velocity>
+        </limit>
+      </axis>
+    </joint>
+
+    <plugin
+      filename="ignition-gazebo-thruster-system"
+      name="ignition::gazebo::systems::Thruster">
+      <namespace>brov</namespace>
+      <joint_name>propeller_SE_joint</joint_name>
+      <thrust_coefficient>0.004422</thrust_coefficient>
+      <fluid_density>1000</fluid_density>
+      <propeller_diameter>0.2</propeller_diameter>
+    </plugin>
+
+
+    <!-- PROPELLER_DE -->
+    <link name="propeller_DE">
+      <pose>-0.02776807 -0.19321351 0.06284841 0 -1.570796327 0</pose>
+
+      <inertial>
+        <mass>0.09</mass>
+        <inertia>
+          <ixx>0.000143971303</ixx>
+          <ixy>0.000000000008</ixy>
+          <ixz>-0.000000000224</ixz>
+          <iyy>0.000140915448</iyy>
+          <iyz>-0.000025236433</iyz>
+          <izz>0.000033571862</izz>
+        </inertia>
+      </inertial>
+
+      <visual name="propeller_mesh">
+        <geometry>
+          <mesh>
+            <uri>model://meshes/propeller.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>>
+    </link>
+
+    <joint name="propeller_DE_joint" type="revolute">
+      <pose>0 0 0 0 0 0</pose>
+      <parent>base_link</parent>
+      <child>propeller_DE</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-1e+12</lower>
+          <upper>1e+12</upper>
+          <effort>-1</effort>
+          <velocity>-1</velocity>
+        </limit>
+      </axis>
+    </joint>
+
+    <plugin
+      filename="ignition-gazebo-thruster-system"
+      name="ignition::gazebo::systems::Thruster">
+      <namespace>brov</namespace>
+      <joint_name>propeller_DE_joint</joint_name>
+      <thrust_coefficient>0.004422</thrust_coefficient>
+      <fluid_density>1000</fluid_density>
+      <propeller_diameter>0.2</propeller_diameter>
+    </plugin>
+
+
+    <!-- PROPELLER_DW -->
+    <link name="propeller_DW">
+      <pose>-0.02772223 0.19324575 0.06284841 0 -1.570796327 0</pose>
+
+      <inertial>
+        <mass>0.09</mass>
+        <inertia>
+          <ixx>0.000143971303</ixx>
+          <ixy>0.000000000008</ixy>
+          <ixz>-0.000000000224</ixz>
+          <iyy>0.000140915448</iyy>
+          <iyz>-0.000025236433</iyz>
+          <izz>0.000033571862</izz>
+        </inertia>
+      </inertial>
+
+      <visual name="propeller_mesh">
+        <geometry>
+          <mesh>
+            <uri>model://meshes/propeller.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>>
+    </link>
+
+    <joint name="propeller_DW_joint" type="revolute">
+      <pose>0 0 0 0 0 0</pose>
+      <parent>base_link</parent>
+      <child>propeller_DW</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-1e+12</lower>
+          <upper>1e+12</upper>
+          <effort>-1</effort>
+          <velocity>-1</velocity>
+        </limit>
+      </axis>
+    </joint>
+
+    <plugin
+      filename="ignition-gazebo-thruster-system"
+      name="ignition::gazebo::systems::Thruster">
+      <namespace>brov</namespace>
+      <joint_name>propeller_DW_joint</joint_name>
+      <thrust_coefficient>0.004422</thrust_coefficient>
+      <fluid_density>1000</fluid_density>
+      <propeller_diameter>0.2</propeller_diameter>
+    </plugin>
+
+  </model>
+</sdf>
